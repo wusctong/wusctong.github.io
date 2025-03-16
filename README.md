@@ -1,4 +1,4 @@
-![README Title](https://mjj.today/i/9psfHM)
+![README Title](https://i.miji.bid/2025/03/16/92ce0b3b68669efb2a0dc32354b1699c.png)
 
 ## About Digital Wasteland
 
