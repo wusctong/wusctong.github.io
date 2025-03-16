@@ -1,4 +1,4 @@
-# Digital Wasteland README
+![README Title](https://mjj.today/i/9psfHM)
 
 ## About Digital Wasteland
 
