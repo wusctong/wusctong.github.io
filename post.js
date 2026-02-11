@@ -36,7 +36,7 @@ async function loadPost() {
     
     try {
         // Fetch the markdown file
-        const response = await fetch(`blogs/${filename}`);
+        const response = await fetch(`./blogs/${filename}`);
         
         if (!response.ok) {
             throw new Error('Post not found');
