@@ -27,7 +27,7 @@ function extractTitleFromFilename(filename) {
 // Function to load and render blog post
 async function loadPost() {
     const filename = getUrlParameter('file');
-    
+
     if (!filename) {
         document.getElementById('postTitle').textContent = 'ERROR';
         document.getElementById('postBody').innerHTML = '<p>No blog post specified.</p>';
@@ -35,7 +35,7 @@ async function loadPost() {
     }
     
     try {
-        // Fetch the markdown file
+        // Fetch the Markdown file
         const response = await fetch(`blogs/${filename}`);
         
         if (!response.ok) {
@@ -44,7 +44,7 @@ async function loadPost() {
         
         const markdown = await response.text();
         
-        // Extract metadata from markdown if present
+        // Extract metadata from Markdown if present
         let title = extractTitleFromFilename(filename);
         let date = extractDateFromFilename(filename);
         let content = markdown;
@@ -68,9 +68,8 @@ async function loadPost() {
         document.getElementById('postTitle').textContent = title;
         document.getElementById('postDate').textContent = date;
         
-        // Render markdown to HTML
-        const html = marked.parse(content);
-        document.getElementById('postBody').innerHTML = html;
+        // Render Markdown to HTML
+        document.getElementById('postBody').innerHTML = marked.parse(content);
         
     } catch (error) {
         console.error('Error loading post:', error);

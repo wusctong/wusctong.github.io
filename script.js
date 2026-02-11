@@ -1,7 +1,7 @@
 // Blog posts configuration
 const BLOGS_FOLDER = 'blogs';
 
-// Function to fetch all markdown files from the blogs folder
+// Function to fetch all Markdown files from the blogs folder
 async function fetchBlogList() {
     try {
         // Fetch the blog index file
@@ -9,9 +9,8 @@ async function fetchBlogList() {
         if (!response.ok) {
             throw new Error('Blog index not found');
         }
-        
-        const blogs = await response.json();
-        return blogs;
+
+        return await response.json();
     } catch (error) {
         console.error('Error fetching blog list:', error);
         return [];
@@ -29,20 +28,12 @@ function extractDateFromFilename(filename) {
 
 // Function to extract title from filename
 function extractTitleFromFilename(filename) {
-    // Remove .md extension
     let title = filename.replace('.md', '');
-    
-    // Remove date prefix if present
     title = title.replace(/^\d{4}-\d{2}-\d{2}-/, '');
-    
-    // Replace hyphens and underscores with spaces
     title = title.replace(/[-_]/g, ' ');
-    
-    // Capitalize words
     title = title.split(' ')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
-    
     return title;
 }
 
@@ -70,11 +61,11 @@ function renderBlogList(blogs) {
     });
     
     postCountElement.textContent = `${blogs.length} ${blogs.length === 1 ? 'ENTRY' : 'ENTRIES'}`;
-    
-    const blogItems = blogs.map(blog => {
+
+    blogListElement.innerHTML = blogs.map(blog => {
         const title = blog.title || extractTitleFromFilename(blog.filename);
         const date = blog.date || extractDateFromFilename(blog.filename);
-        
+
         return `
             <a href="post.html?file=${encodeURIComponent(blog.filename)}" class="blog-item">
                 <span class="blog-name">${title}</span>
@@ -83,8 +74,6 @@ function renderBlogList(blogs) {
             </a>
         `;
     }).join('');
-    
-    blogListElement.innerHTML = blogItems;
 }
 
 // Initialize the blog list
