@@ -1,3 +1,16 @@
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/roboto@5/index.css');
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5/index.css');
+
+*,
+*::before,
+*::after {
+    font-family: 'Roboto',
+    'Noto Sans SC',
+    'PingFang SC',
+    'Microsoft YaHei',
+    sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -266,9 +279,17 @@ main {
     color: var(--accent);
 }
 
-.post-body h1 { font-size: 28px; }
-.post-body h2 { font-size: 24px; }
-.post-body h3 { font-size: 20px; }
+.post-body h1 {
+    font-size: 28px;
+}
+
+.post-body h2 {
+    font-size: 24px;
+}
+
+.post-body h3 {
+    font-size: 20px;
+}
 
 .post-body p {
     margin-bottom: 20px;
@@ -386,22 +407,22 @@ footer {
     .container {
         padding: 20px 15px;
     }
-    
+
     h1 {
         font-size: 18px;
         letter-spacing: 4px;
     }
-    
+
     .blog-item {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
-    
+
     .blog-spacer {
         display: none;
     }
-    
+
     .post-header h2 {
         font-size: 24px;
     }
