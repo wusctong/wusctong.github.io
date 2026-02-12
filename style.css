@@ -1,5 +1,6 @@
 @import url('https://cdn.jsdelivr.net/npm/@fontsource/roboto@5/index.css');
 @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5/index.css');
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono/index.css');
 
 *,
 *::before,
@@ -27,8 +28,52 @@
     --border: #1f2937;
 }
 
+strong {
+    background-image: linear-gradient(
+        104deg,
+        transparent 0%,
+        transparent 4%,
+        color-mix(in srgb, var(--accent-dark) 55%, transparent) 4%,
+        color-mix(in srgb, var(--accent-dark) 75%, transparent) 20%,
+        color-mix(in srgb, var(--accent-dark) 80%, transparent) 67%,
+        color-mix(in srgb, var(--accent-dark) 65%, transparent) 80%,
+        color-mix(in srgb, var(--accent-dark) 38%, transparent) 93%,
+        transparent 93%,
+        transparent 100%
+    );
+    background-size: 100% 85%;
+    background-repeat: no-repeat;
+    background-position: 0 55%;
+    padding: 0 2px;
+    border-radius: 2px 4px 3px 1px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    display: inline-block;
+    background-image: linear-gradient(
+            104deg,
+            transparent 0%,
+            transparent 2%,
+            color-mix(in srgb, var(--accent-dark) 45%, transparent) 2%,
+            color-mix(in srgb, var(--accent-dark) 65%, transparent) 15%,
+            color-mix(in srgb, var(--accent-dark) 70%, transparent) 70%,
+            color-mix(in srgb, var(--accent-dark) 55%, transparent) 85%,
+            color-mix(in srgb, var(--accent-dark) 30%, transparent) 95%,
+            transparent 95%,
+            transparent 100%
+    );
+    background-size: 100% 40%;
+    background-repeat: no-repeat;
+    background-position: 0 60%;
+    padding-bottom: 3px;
+    border-radius: 0;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
 body {
-    font-family: 'Maple Mono NF CN', monospace;
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
@@ -225,7 +270,6 @@ main {
     font-size: 12px;
     color: var(--text-secondary);
     letter-spacing: 1px;
-    font-family: 'Maple Mono NF CN', monospace;
 }
 
 /* Post Content */
@@ -256,7 +300,6 @@ main {
 .post-line {
     height: 2px;
     background: var(--accent);
-    margin-bottom: 40px;
     width: 60px;
 }
 
@@ -276,19 +319,6 @@ main {
     margin-bottom: 20px;
     font-weight: 400;
     letter-spacing: 1px;
-    color: var(--accent);
-}
-
-.post-body h1 {
-    font-size: 28px;
-}
-
-.post-body h2 {
-    font-size: 24px;
-}
-
-.post-body h3 {
-    font-size: 20px;
 }
 
 .post-body p {
@@ -309,8 +339,10 @@ main {
     background: var(--bg-secondary);
     padding: 2px 6px;
     border: 1px solid var(--border);
-    font-family: 'Maple Mono NF CN', monospace;
-    font-size: 14px;
+    font-family: 'JetBrains Mono',
+    'Noto Sans SC',
+    monospace;
+    font-size: 15px;
 }
 
 .post-body pre {
