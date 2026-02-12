@@ -1,3 +1,5 @@
+const BLOGS_FOLDER = 'blogs';
+
 // Function to get URL parameter
 function getUrlParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -36,17 +38,26 @@ async function loadPost() {
     
     try {
         // Fetch the Markdown file
-        const response = await fetch(`blogs/${filename}`);
+        const response = await fetch(`${BLOGS_FOLDER}/${filename}`);
+        const blogsResponse = await fetch(`${BLOGS_FOLDER}/index.json`);
         
-        if (!response.ok) {
+        if (!response.ok || !blogsResponse.ok) {
             throw new Error('Post not found');
         }
-        
+
+        const blogs = await blogsResponse.json();
+        let currentBlog = null;
+        for (const blog of blogs) {
+            if (blog.filename === filename) {
+                currentBlog = blog;
+            }
+        }
+
         const markdown = await response.text();
         
         // Extract metadata from Markdown if present
-        let title = extractTitleFromFilename(filename);
-        let date = extractDateFromFilename(filename);
+        let title = currentBlog.title || extractTitleFromFilename(filename);
+        let date = currentBlog.date || extractDateFromFilename(filename);
         let content = markdown;
         
         // Check for YAML front matter

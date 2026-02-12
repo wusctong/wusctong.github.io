@@ -1,8 +1,3 @@
----
-title: Build My Own Blog!
-date: 2026-02-11
----
-
 Setting up a personal blog was quite **annoying** and difficult years ago,
 especially for beginners.
 So when I forked these blog templates on GitHub under the guide of
