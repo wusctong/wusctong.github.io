@@ -59,15 +59,26 @@ function renderBlogList(blogs) {
         const dateB = extractDateFromFilename(b.filename);
         return dateB.localeCompare(dateA);
     });
+
+    const currentDate = new Date().toISOString().split("T")[0];
+    for (let i = blogs.length - 1; i > 0; i--) {
+        if(extractDateFromFilename(blogs[i].filename).localeCompare(currentDate)) {
+            blogs = blogs.slice(i - 1, blogs.length);
+            break;
+        }
+    }
     
     postCountElement.textContent = `${blogs.length} ${blogs.length === 1 ? 'ENTRY' : 'ENTRIES'}`;
 
+    let index = blogs.length;
     blogListElement.innerHTML = blogs.map(blog => {
+        index--;
+
         const title = blog.title || extractTitleFromFilename(blog.filename);
         const date = blog.date || extractDateFromFilename(blog.filename);
 
         return `
-            <a href="post.html?file=${encodeURIComponent(blog.filename)}" class="blog-item">
+            <a href="post.html?post=${index}" class="blog-item">
                 <span class="blog-name">${title}</span>
                 <div class="blog-spacer"></div>
                 <span class="blog-date">${date}</span>

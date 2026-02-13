@@ -28,60 +28,70 @@ function extractTitleFromFilename(filename) {
 
 // Function to load and render blog post
 async function loadPost() {
-    const filename = getUrlParameter('file');
+    const blogIndex = getUrlParameter('post');
 
-    if (!filename) {
+    if (!blogIndex) {
         document.getElementById('postTitle').textContent = 'ERROR';
         document.getElementById('postBody').innerHTML = '<p>No blog post specified.</p>';
         return;
     }
     
     try {
-        // Fetch the Markdown file
-        const response = await fetch(`${BLOGS_FOLDER}/${filename}`);
         const blogsResponse = await fetch(`${BLOGS_FOLDER}/index.json`);
-        
-        if (!response.ok || !blogsResponse.ok) {
+
+        if (!blogsResponse.ok) {
             throw new Error('Post not found');
         }
 
         const blogs = await blogsResponse.json();
-        let currentBlog = null;
-        for (const blog of blogs) {
-            if (blog.filename === filename) {
-                currentBlog = blog;
-            }
+        blogs.sort((a, b) => {
+            const dateA = extractDateFromFilename(a.filename);
+            const dateB = extractDateFromFilename(b.filename);
+            return dateA.localeCompare(dateB);
+        });
+
+        if (blogIndex >= blogs.length) {
+            document.getElementById('postTitle').textContent = 'ERROR';
+            document.getElementById('postBody').innerHTML = '<p>No blog post specified.</p>';
+            return;
+        }
+
+        const currentBlog = blogs[blogIndex];
+        const response = await fetch(`${BLOGS_FOLDER}/${currentBlog.filename}`);
+
+        if(!response.ok) {
+            throw new Error('Post not found');
         }
 
         const markdown = await response.text();
-        
+
         // Extract metadata from Markdown if present
-        let title = currentBlog.title || extractTitleFromFilename(filename);
-        let date = currentBlog.date || extractDateFromFilename(filename);
+        let title = currentBlog.title || extractTitleFromFilename(currentBlog.filename);
+        let date = currentBlog.date || extractDateFromFilename(currentBlog.filename);
         let content = markdown;
-        
+
         // Check for YAML front matter
         const frontMatterMatch = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
         if (frontMatterMatch) {
             const frontMatter = frontMatterMatch[1];
             content = frontMatterMatch[2];
-            
+
             // Parse front matter
             const titleMatch = frontMatter.match(/title:\s*(.+)/);
             const dateMatch = frontMatter.match(/date:\s*(.+)/);
-            
+
             if (titleMatch) title = titleMatch[1].trim().replace(/^["']|["']$/g, '');
             if (dateMatch) date = dateMatch[1].trim();
         }
-        
+
         // Update page title and metadata
         document.title = title;
         document.getElementById('postTitle').textContent = title;
         document.getElementById('postDate').textContent = date;
-        
+
         // Render Markdown to HTML
         document.getElementById('postBody').innerHTML = marked.parse(content);
-        
+
     } catch (error) {
         console.error('Error loading post:', error);
         document.getElementById('postTitle').textContent = 'POST NOT FOUND';
