@@ -1,17 +1,22 @@
 [
-  {
-    "filename": "2026-05-13-my-bd-1.md",
-    "title": "Birthday!",
-    "date": "2026-05-13"
-  },
-  {
-    "filename": "2025-03-08-luogu-1.md",
-    "title": "洛谷P2802 广搜嗖嗖嗖嗖嗖",
-    "date": "2025-03-08"
-  },
-  {
-    "filename": "2026-02-11-build-my-own-blog.md",
-    "title": "Build My Own Blog",
-    "date": "2026-02-11"
-  }
+    {
+        "filename": "2026-05-12-a-great-success.md",
+        "title": "A GREAT SUCCESS!",
+        "date": "2026-05-12"
+    },
+    {
+        "filename": "2026-05-13-my-bd-1.md",
+        "title": "Birthday!",
+        "date": "2026-05-13"
+    },
+    {
+        "filename": "2025-03-08-luogu-1.md",
+        "title": "洛谷P2802 广搜嗖嗖嗖嗖嗖",
+        "date": "2025-03-08"
+    },
+    {
+        "filename": "2026-02-11-build-my-own-blog.md",
+        "title": "Build My Own Blog",
+        "date": "2026-02-11"
+    }
 ]
